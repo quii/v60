@@ -8,7 +8,7 @@ import (
 func PrintInstructions(out io.Writer, coffeeWeight float64) {
 	ratios := NewWaterWeights(coffeeWeight)
 
-	fmt.Fprintln(out,"Warm the filter paper with got water (tap will do)")
+	fmt.Fprintln(out,"Warm the filter paper with hot water (tap will do)")
 	fmt.Fprintln(out,"Add coffee grounds")
 	fmt.Fprintln(out,"Create well in the coffee")
 	fmt.Fprintln(out, "Start timer")
