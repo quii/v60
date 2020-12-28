@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	out := os.Stdout
+	out := v60.NewSayItOutLoud(os.Stdout)
 
 	reader := bufio.NewScanner(os.Stdin)
 	fmt.Print("Enter coffee weight: ")
