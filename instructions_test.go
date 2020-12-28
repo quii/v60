@@ -3,17 +3,19 @@ package v60
 import "os"
 
 func ExamplePrintInstructions() {
-	PrintInstructions(os.Stdout, 15)
+	out := os.Stdout
+	PrintPrep(out)
+	PrintInstructions(out, newMockStopwatch(out), 15)
 	// Output: Warm the filter paper with hot water (tap will do)
 	//Add coffee grounds
 	//Create well in the coffee
-	//Start timer
-	//Satuate the coffee with 30g of water
+	//Saturate the coffee with 30g of water
 	//Swirl the coffee slurry until evenly mixed
-	//Wait until 45s
-	//Add more water, scales should now be at 150g
-	//Wait until 1 min 15s
+	//Wait 45s for next prompt (elapsed 45s)
+	//Add more water until scales read 150g
+	//Wait 30s for next prompt (elapsed 1m15s)
 	//Add remaining water up to 250g, pour slowly
-	//At 1 min 45s stir clockwise once and then anticlockwise
+	//Wait 30s for next prompt (elapsed 1m45s)
+	//Stir clockwise once and then anticlockwise
 	//Wait for the drawdown, around 3 minutes 30s
 }

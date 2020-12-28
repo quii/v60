@@ -57,4 +57,3 @@ func AssertWeight(t *testing.T, got, want float64) {
 		t.Errorf("got %v, want %v", got, want)
 	}
 }
-

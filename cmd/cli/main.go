@@ -10,6 +10,8 @@ import (
 )
 
 func main() {
+	out := os.Stdout
+
 	reader := bufio.NewScanner(os.Stdin)
 	fmt.Print("Enter coffee weight: ")
 	reader.Scan()
@@ -19,7 +21,10 @@ func main() {
 		log.Fatal("Please enter a number for the coffee weight", err)
 	}
 
-	v60.PrintInstructions(os.Stdout, coffeeWeight)
+	v60.PrintPrep(out)
+
+	fmt.Print("Hit return when prepped")
+	reader.Scan()
+
+	v60.PrintInstructions(out, v60.NewRealStopwatch(out), coffeeWeight)
 }
-
-
