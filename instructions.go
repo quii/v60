@@ -16,19 +16,21 @@ type Stopwatch interface {
 	Wait(duration time.Duration)
 }
 
-func PrintInstructions(out io.Writer, stopwatch Stopwatch, coffeeWeight float64) {
+type V60Barista interface {
+	BloomCoffee(amountOfWater float64)
+	AddWater(amountOfWater float64)
+	Stir()
+}
+
+func PrintInstructions(barista V60Barista, stopwatch Stopwatch, coffeeWeight float64) {
 	ratios := NewWaterWeights(coffeeWeight)
 
-	fmt.Fprintf(out, "Saturate the coffee with %.0fg of water\n", ratios.BloomWaterWeight)
-	fmt.Fprintln(out, "Swirl the coffee slurry until evenly mixed")
+	barista.BloomCoffee(ratios.BloomWaterWeight)
 	stopwatch.Wait(45 * time.Second)
 
-	fmt.Fprintf(out, "Add more water until scales read %.0fg\n", ratios.FirstPourWeight)
+	barista.AddWater(ratios.FirstPourWeight)
 	stopwatch.Wait(30 * time.Second)
 
-	fmt.Fprintf(out, "Add remaining water up to %.0fg, pour slowly\n", ratios.FinalPourWeight)
+	barista.AddWater(ratios.FinalPourWeight)
 	stopwatch.Wait(30 * time.Second)
-
-	fmt.Fprintln(out, "Stir clockwise once and then anticlockwise")
-	fmt.Fprintln(out, "Wait for the drawdown, around 3 minutes 30s")
 }

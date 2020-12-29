@@ -17,7 +17,8 @@ func NewSayItOutLoud(out io.Writer) *SayItOutLoud {
 func (s *SayItOutLoud) Write(p []byte) (int, error) {
 	cmd := exec.Command("say", string(p))
 	err := cmd.Run()
-	fmt.Fprint(s.textOutput, string(p))
-	return len(p), err
+	if err != nil {
+		return 0, err
+	}
+	return fmt.Fprint(s.textOutput, string(p))
 }
-

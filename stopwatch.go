@@ -16,7 +16,7 @@ func NewRealStopwatch(out io.Writer) *RealStopwatch {
 }
 
 func (s RealStopwatch) Wait(duration time.Duration) {
-	elapsed := time.Now().Add(duration).Sub(s.start)
+	elapsed := time.Now().Add(duration).Sub(s.start).Round(time.Second)
 	fmt.Fprintln(s.out)
 	fmt.Fprintf(s.out, "Wait %s for next prompt (elapsed %s)\n", duration, elapsed)
 	time.Sleep(duration)

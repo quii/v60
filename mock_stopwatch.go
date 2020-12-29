@@ -7,7 +7,7 @@ import (
 )
 
 type mockStopwatch struct {
-	out io.Writer
+	out     io.Writer
 	elapsed time.Duration
 }
 
@@ -16,7 +16,6 @@ func newMockStopwatch(out io.Writer) *mockStopwatch {
 }
 
 func (m *mockStopwatch) Wait(duration time.Duration) {
-	m.elapsed+=duration
+	m.elapsed += duration
 	fmt.Fprintf(m.out, "Wait %s for next prompt (elapsed %s)\n", duration, m.elapsed)
 }
-
