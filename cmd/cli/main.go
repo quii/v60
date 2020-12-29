@@ -26,5 +26,9 @@ func main() {
 	fmt.Print("Hit return when prepped")
 	reader.Scan()
 
-	v60.PrintInstructions(v60.NewBarista(out), v60.NewRealStopwatch(out), coffeeWeight)
+	v60.PrintInstructions(
+		v60.NewBarista(out),
+		v60.NewRealStopwatch(out),
+		v60.NewWaterWeights(coffeeWeight),
+	)
 }

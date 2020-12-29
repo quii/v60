@@ -4,8 +4,13 @@ import "os"
 
 func ExamplePrintInstructions() {
 	out := os.Stdout
+
 	PrintPrep(out)
-	PrintInstructions(NewBarista(out), newMockStopwatch(out), 15)
+	PrintInstructions(
+		NewBarista(out),
+		newMockStopwatch(out),
+		NewWaterWeights(15),
+	)
 	// Output: Warm the filter paper with hot water (tap will do)
 	//Add coffee grounds
 	//Create well in the coffee
