@@ -7,18 +7,23 @@ import (
 )
 
 type RealStopwatch struct {
-	start time.Time
-	out   io.Writer
+	out io.Writer
 }
 
 func NewRealStopwatch(out io.Writer) *RealStopwatch {
-	return &RealStopwatch{start: time.Now(), out: out}
+	return &RealStopwatch{out: out}
 }
 
 func (s RealStopwatch) Wait(duration time.Duration) {
-	elapsed := time.Now().Add(duration).Sub(s.start).Round(time.Second)
-	fmt.Fprintln(s.out)
-	fmt.Fprintf(s.out, "Wait %s for next prompt (elapsed %s)\n", duration, elapsed)
+	fmt.Fprintf(s.out, "\nWait %d seconds\n", int(duration.Seconds()))
+	s.scheduleCountdown(duration)
 	time.Sleep(duration)
-	fmt.Fprintln(s.out)
+}
+
+func (s RealStopwatch) scheduleCountdown(duration time.Duration) *time.Timer {
+	return time.AfterFunc(duration-6*time.Second, func() {
+		for i := 5; i > 0; i-- {
+			fmt.Fprintln(s.out, i)
+		}
+	})
 }

@@ -13,7 +13,7 @@ func main() {
 	out := v60.NewSayItOutLoud(os.Stdout)
 
 	reader := bufio.NewScanner(os.Stdin)
-	fmt.Print("Enter coffee weight: ")
+	fmt.Fprint(out, "Enter coffee weight: ")
 	reader.Scan()
 	coffeeWeight, err := strconv.ParseFloat(reader.Text(), 64)
 
@@ -21,14 +21,17 @@ func main() {
 		log.Fatal("Please enter a number for the coffee weight", err)
 	}
 
-	v60.PrintPrep(out)
+	barista := v60.NewBarista(out)
 
-	fmt.Print("Hit return when prepped")
+	barista.PrepV60()
+	fmt.Fprint(out, "Hit return when prepped")
 	reader.Scan()
 
-	v60.PrintInstructions(
-		v60.NewBarista(out),
+	v60.Brew(
+		barista,
 		v60.NewRealStopwatch(out),
 		v60.NewWaterWeights(coffeeWeight),
 	)
+
+	fmt.Fprint(out, "Wait for the drawdown to finish, enjoy your coffee")
 }
